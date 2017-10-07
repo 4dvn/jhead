@@ -14,7 +14,7 @@
 
 ### General metadata options
 
-`-te <name>	Transplant Exif header from image <name> into specified image. This option is useful if you like to edit the photos but still want the Exif header on your photos. As most photo editing programs will wipe out the Exif header, this option can be used to re-transplant them back in after editing the photos.
+-te <name>	Transplant Exif header from image <name> into specified image. This option is useful if you like to edit the photos but still want the Exif header on your photos. As most photo editing programs will wipe out the Exif header, this option can be used to re-transplant them back in after editing the photos.
 This feature has an interesting 'relative path' option for specifying the thumbnail name. Whenever the <name> contains the characters '&i', jhead will substitute the original filename for this name. This allows creating a 'relative name' when doing a whole batch of files. For example, the incantation:
 jhead -te "originals\&i" *.jpg
 would transfer the Exif header for each .jpg file in the originals directory by the same name, Both Win32 and most UNIX shells treat the '&' character in a special way, so you have to put quotes around that command line option for the '&' to even be passed to the program.
@@ -29,11 +29,11 @@ would transfer the Exif header for each .jpg file in the originals directory by 
 A temporary file containing the comment is created and a text editor is launched to edit the file. The editor is specified in the EDITOR environment variable. If none is specified notepad or vi are used under Windows and UNIX respectively. After the editor exits, the data is transferred back into the image, and the temporary file deleted.
 -cs <name>	Save comment section to a file
 -ci <name>	Replace comment with text from file.
--cl <comment>	Replace comment with comment from command line.`
+-cl <comment>	Replace comment with comment from command line.
 
 ### Date / Time manipulation options
 
-`-ft	Sets the file's system time stamp to what is stored in the Exif header.
+-ft	Sets the file's system time stamp to what is stored in the Exif header.
 -dsft	Sets the Exif timestamp to the file's timestamp. Requires an Exif header to pre-exist. Use -mkexif option to create one if needed.
 -n[<fmt-string>]	This option causes files to be renamed and/or moved according to the Exif header "DateTimeOriginal" field. If the file is not an Exif file, or the DateTimeOriginal does not contain a valid value, the file date is used.
 If the name includes '/' or '\' (under windows), this is interpreted as a new path for the file. If the new path does not exist, the path will be created.
@@ -76,7 +76,8 @@ jhead -ta+49 *.jpg
 -da<date>-<date>	Works like -ta, but for specifying large date offsets, to be used when fixing dates from cameras where the date was set incorrectly, such as having date and time reset by battery removal on some cameras. This feature is best for adjusting dates on pictures taken over a large range of dates. For pictures all taken the same date, the "-ds" option is often easier to use.
 Because different months and years have different numbers of days in them, a simple offset for months, days, years would lead to unexpected results at times. The time offset is thus specified as a difference between two dates, so that jhead can figure out exactly how many days the timestamp needs to be adjusted by, including leap years and daylight savings time changes. The dates are specified as yyyy:mm:dd. For sub-day adjustments, a time of day can also be included, by specifying yyyy:nn:dd/hh:mm or yyyy:mm:dd/hh:mm:ss
 
-Examples:
+### Examples:
+
 Year on camera was set to 2004 instead of 2005 for pictures taken in April
 
 jhead -da2005:03:01-2004:03:01
@@ -86,7 +87,8 @@ jhead -da2005:05:29/11:21-2002:01:01
     yyyy:mm:dd-hh:mm:ss
 -ds<date-time>	Sets the date stored in the Exif header to what is specified on the command line. Can be used to set date, just year and month, or just year. Date is specified as:
     yyyy:mm:dd, yyyy:mm, or yyyy
-Thumbnail manipulation options
+
+### Thumbnail manipulation options
 
 -dt	Delete thumbnails from the Exif header, but leave the interesting parts intact. This option truncates the thumbnail from the Exif header, provided that the thumbnail is the last part of the Exif header (which so far as I know is always the case). Exif headers have a built-in thumbnail, which is typically 240x160 and 10k in size. This thumbnail is used by digital cameras. Windows XP, as well as various photo viewing software may also use this thumbnail if present, but work just fine if it isn't.
 -st <name>	Save the built in thumbnail from Jpegs that came from a digital camera. The thumbnail lives inside the Exif header, and is a very low-res JPEG image. Note that making any changes to a photo, except for with some programs, generally wipes out the Exif header and with it the thumbnail.
@@ -149,7 +151,7 @@ This program goes one step beyond beyond that in that "**" as a path component m
 
   jhead c:\**\*.jpg
 
-will find ALL Jpegs files on the c: drive, including those in the root directory. The ** only works if it is the only part of that path component. For example, the path 'c:\a**\*.jpg' will not recurse. The '**' recursive expansion is ONLY supported on the Windows version. The code is in the module 'myglob.c', if you want to reuse it (I certainly intend to reuse that code for other applications). Under UNIX, the shell's wildcard expansion is pretty decent already, and dealing with the convoluted nature of some UNIX file layouts, doing better would have been much more of a challenge.`
+will find ALL Jpegs files on the c: drive, including those in the root directory. The ** only works if it is the only part of that path component. For example, the path 'c:\a**\*.jpg' will not recurse. The '**' recursive expansion is ONLY supported on the Windows version. The code is in the module 'myglob.c', if you want to reuse it (I certainly intend to reuse that code for other applications). Under UNIX, the shell's wildcard expansion is pretty decent already, and dealing with the convoluted nature of some UNIX file layouts, doing better would have been much more of a challenge.
 
 ## Compiling:
 
